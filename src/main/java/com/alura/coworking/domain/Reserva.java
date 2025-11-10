@@ -1,17 +1,22 @@
 package com.alura.coworking.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity
 public class Reserva {
 
-    public String idReserva;
-    public Usuario usuario;
-    public Sala sala;
-    public String dataReserva;
-    public LocalDateTime horaInicio;
-    public LocalDateTime horaFim;
-    public StatusReserva statusReserva;
+    @Id
+    private String idReserva;
+    private Usuario usuario;
+    private Sala sala;
+    private String dataReserva;
+    private LocalDateTime horaInicio;
+    private LocalDateTime horaFim;
+    private StatusReserva statusReserva;
 
     public Reserva(String idReserva, Usuario usuario, Sala sala, String dataReserva, LocalDateTime horaInicio, LocalDateTime horaFim) {
         this.idReserva = idReserva;
