@@ -2,6 +2,7 @@ package com.alura.coworking.service;
 
 import com.alura.coworking.domain.Usuario;
 import com.alura.coworking.dto.UsuarioDto;
+import com.alura.coworking.exception.UsuarioNaoEncontradoException;
 import com.alura.coworking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public UsuarioDto buscarUsuarioPorId(String id) {
-       Usuario usuario = usuarioRepository.findById(id).orElse(null);
+       Usuario usuario = usuarioRepository.findById(id).orElseThrow(
+           () -> new UsuarioNaoEncontradoException("Usuario com ID " + id + " nao encontrado."));
          if (usuario != null) {
                 return new UsuarioDto(
                         usuario.getNome(),
@@ -72,7 +74,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 
     @Override
     public UsuarioDto atualizarUsuario(String id, UsuarioDto usuarioDto) {
-        Usuario usuario = usuarioRepository.findById(id).orElse(null);
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(
+                () -> new UsuarioNaoEncontradoException("Usuario com ID " + id + " nao encontrado.")
+        );
         if (usuario != null) {
             usuario.setNome(usuarioDto.nome());
             usuario.setEmail(usuarioDto.email());
