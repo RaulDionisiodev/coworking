@@ -1,5 +1,6 @@
 package com.alura.coworking.controller;
 
+import com.alura.coworking.config.ApiV1Prefix;
 import com.alura.coworking.dto.UsuarioDto;
 import com.alura.coworking.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/usuarios")
+@RequestMapping(ApiV1Prefix.API_V1 + "/usuarios")
 @RestController
 public class UsuarioController {
 

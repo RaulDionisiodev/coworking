@@ -1,5 +1,6 @@
 package com.alura.coworking.controller;
 
+import com.alura.coworking.config.ApiV1Prefix;
 import com.alura.coworking.dto.ReservaDto;
 import com.alura.coworking.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reservas")
+@RequestMapping(ApiV1Prefix.API_V1 + "/reservas")
 public class ReservaController {
 
     private final ReservaService service;
