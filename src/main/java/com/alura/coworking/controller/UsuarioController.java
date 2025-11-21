@@ -40,13 +40,7 @@ public class UsuarioController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarUsuario(@PathVariable String id) {
-        usuarioService.deletarUsuario(id);
-        return ResponseEntity.noContent().build();
-    }
-
+    
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioDto> atualizarUsuario(@PathVariable String id, @RequestBody UsuarioDto usuarioDto) {
         UsuarioDto usuarioAtualizado = usuarioService.atualizarUsuario(id, usuarioDto);
