@@ -2,6 +2,7 @@ package com.alura.coworking.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -11,7 +12,9 @@ public class Reserva {
 
     @Id
     private String idReserva;
+    @ManyToOne
     private Usuario usuario;
+    @ManyToOne
     private Sala sala;
     private String dataReserva;
     private LocalDateTime horaInicio;
