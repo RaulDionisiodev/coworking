@@ -14,6 +14,7 @@ import com.alura.coworking.repository.SalaRepository;
 import com.alura.coworking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.ReadOnlyFileSystemException;
 import java.time.LocalDateTime;
@@ -33,6 +34,7 @@ public class ReservaServiceImpl implements ReservaService {
         this.salaRepository = salaRepository;
     }
 
+    @Transactional // se gerar alguma exceção, desfaz todas as operações do método
     @Override
     public void reservarSala(ReservaDto reservaDto) {
         Reserva reserva = new Reserva();
@@ -111,6 +113,7 @@ public class ReservaServiceImpl implements ReservaService {
         return null;
     }
 
+    @Transactional
     @Override
     public void cancelarReserva(String idReserva) {
         Reserva reserva = reservaRepository.findById(idReserva)
@@ -121,6 +124,7 @@ public class ReservaServiceImpl implements ReservaService {
 
     }
 
+    @Transactional
     @Override
     public boolean atualizarReserva(String id, ReservaDto reservaDto) {
         Reserva reserva = reservaRepository.findById(id)

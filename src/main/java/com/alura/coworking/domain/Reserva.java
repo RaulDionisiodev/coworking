@@ -1,6 +1,7 @@
 package com.alura.coworking.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
@@ -12,9 +13,9 @@ public class Reserva {
 
     @Id
     private String idReserva;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) //Lazy para evitar carregamento desnecessário
     private Usuario usuario;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Sala sala;
     private String dataReserva;
     private LocalDateTime horaInicio;

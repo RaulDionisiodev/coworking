@@ -6,6 +6,7 @@ import com.alura.coworking.exception.SalaNaoEncontradaException;
 import com.alura.coworking.repository.SalaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class SalaServiceImpl implements SalaService{
     }
 
 
+    @Transactional // se gerar alguma exceção, desfaz todas as operações do método
     @Override
     public SalaDto cadastrarSala(SalaDto salaDto) {
         Sala sala = new Sala();
@@ -37,6 +39,7 @@ public class SalaServiceImpl implements SalaService{
         return toDto(sala);
     }
 
+    @Transactional
     @Override
     public boolean atualizarSala(String idSala, SalaDto salaDto) {
         Sala sala = repository.findById(idSala)
@@ -48,6 +51,7 @@ public class SalaServiceImpl implements SalaService{
         return true;
     }
 
+    @Transactional
     @Override
     public void deletarSala(String idSala) {
         Sala sala = repository.findById(idSala)

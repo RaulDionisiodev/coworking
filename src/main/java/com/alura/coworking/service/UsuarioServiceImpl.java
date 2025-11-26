@@ -6,6 +6,7 @@ import com.alura.coworking.exception.UsuarioNaoEncontradoException;
 import com.alura.coworking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class UsuarioServiceImpl implements UsuarioService{
    }
 
 
+    @Transactional
     @Override
     public UsuarioDto criarUsuario(UsuarioDto usuarioDto) {
         Usuario usuario = new Usuario(
@@ -67,11 +69,13 @@ public class UsuarioServiceImpl implements UsuarioService{
        return null;
     }
 
+    @Transactional
     @Override
     public void deletarUsuario(String id) {
         usuarioRepository.findById(id).ifPresent(usuarioRepository::delete);
     }
 
+    @Transactional
     @Override
     public UsuarioDto atualizarUsuario(String id, UsuarioDto usuarioDto) {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(
