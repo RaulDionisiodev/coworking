@@ -1,4 +1,11 @@
 package com.alura.coworking.dto;
 
-public record UsuarioDto(String nome, String email, String cpf) {
+import jakarta.validation.constraints.NotBlank;
+
+public record UsuarioDto(
+    @NotBlank(message = "O nome é obrigatório")
+    String nome,
+    String email,
+    @NotBlank(message = "O CPF é obrigatório")
+    String cpf) {
 }

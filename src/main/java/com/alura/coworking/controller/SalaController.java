@@ -3,9 +3,9 @@ package com.alura.coworking.controller;
 import com.alura.coworking.config.ApiV1Prefix;
 import com.alura.coworking.dto.SalaDto;
 import com.alura.coworking.service.SalaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class SalaController {
     }
 
     @PostMapping
-    public ResponseEntity<SalaDto> cadastrarSala(@RequestBody @Validated SalaDto salaDto) {
+    public ResponseEntity<SalaDto> cadastrarSala(@RequestBody @Valid SalaDto salaDto) {
         SalaDto novaSala = service.cadastrarSala(salaDto);
         return ResponseEntity.ok(novaSala);
     }

@@ -1,6 +1,15 @@
 package com.alura.coworking.dto;
 
-public record SalaDto(String id, String nomeDaSala, int capacidade, boolean emUso) {
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
+public record SalaDto(
+    String id,
+    @NotBlank(message = "O nome da sala é obrigatório")
+    String nomeDaSala,
+    @Min(value = 1, message = "A capacidade deve ser pelo menos 1")
+    int capacidade,
+    boolean emUso) {
 
     @Override
     public String id() {

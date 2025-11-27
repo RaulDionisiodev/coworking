@@ -1,6 +1,22 @@
 package com.alura.coworking.dto;
 
-public record ReservaDto(String idReserva, String idUsuario, String idSala, String dataReserva, String horaInicio, String horaFim) {
+import jakarta.validation.constraints.NotBlank;
+
+public record ReservaDto(
+    String idReserva,
+    @NotBlank(message = "O idUsuario é obrigatório")
+    String idUsuario,
+    @NotBlank(message = "O idSala é obrigatório")
+    String idSala,
+    @NotBlank(message = "A dataReserva é obrigatória")
+    String dataReserva,
+    @NotBlank(message = "A horaInicio é obrigatória")
+    String horaInicio,
+    @NotBlank(message = "A horaFim é obrigatória")
+    String horaFim
+) {
+
+
     public String getIdReserva() {
         return idReserva;
     }

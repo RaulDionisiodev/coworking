@@ -3,6 +3,7 @@ package com.alura.coworking.controller;
 import com.alura.coworking.config.ApiV1Prefix;
 import com.alura.coworking.dto.ReservaDto;
 import com.alura.coworking.service.ReservaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +24,7 @@ public class ReservaController {
 
 
     @PostMapping
-    public ResponseEntity<Void> reservarSala(@RequestBody ReservaDto reservaDto) {
+    public ResponseEntity<Void> reservarSala(@RequestBody  @Valid ReservaDto reservaDto) {
         service.reservarSala(reservaDto);
         return ResponseEntity.status(201).build();
     }

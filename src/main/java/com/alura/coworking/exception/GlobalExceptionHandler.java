@@ -2,6 +2,7 @@ package com.alura.coworking.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -26,5 +27,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ReservaInvalidaException.class)
     public ResponseEntity<String> handleReservaInvalida(ReservaInvalidaException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleValidationException(MethodArgumentNotValidException ex) {
+        StringBuilder sb = new StringBuilder();
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            sb.append(error.getField()).append(": ").append(error.getDefaultMessage()).append("; ");
+        });
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sb.toString());
     }
 }

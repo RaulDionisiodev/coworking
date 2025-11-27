@@ -3,6 +3,7 @@ package com.alura.coworking.controller;
 import com.alura.coworking.config.ApiV1Prefix;
 import com.alura.coworking.dto.UsuarioDto;
 import com.alura.coworking.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioDto> criarUsuario(@RequestBody UsuarioDto usuario) {
+    public ResponseEntity<UsuarioDto> criarUsuario(@RequestBody @Valid UsuarioDto usuario) {
         UsuarioDto usuarioCriado = usuarioService.criarUsuario(usuario);
         return ResponseEntity.status(201).body(usuarioCriado);
     }
