@@ -1,6 +1,8 @@
 package com.alura.coworking.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class Sala {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id; // identificador unico da sala
     private String nomeDaSala; // nome da sala
     private int capacidade; // capacidade maxima de pessoas na sala

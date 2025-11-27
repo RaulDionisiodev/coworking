@@ -2,11 +2,14 @@ package com.alura.coworking.service;
 
 import com.alura.coworking.domain.Usuario;
 import com.alura.coworking.dto.UsuarioDto;
+import com.alura.coworking.exception.CpfJaCadastradoException;
 import com.alura.coworking.exception.UsuarioNaoEncontradoException;
 import com.alura.coworking.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,11 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Transactional
     @Override
     public UsuarioDto criarUsuario(UsuarioDto usuarioDto) {
-        Usuario usuario = new Usuario(
+        if (usuarioRepository.existsByCpf(usuarioDto.cpf())) {
+            throw new CpfJaCadastradoException();
+        }
+
+       Usuario usuario = new Usuario(
                 usuarioDto.nome(),
                 usuarioDto.email(),
                 usuarioDto.cpf()
@@ -72,6 +79,9 @@ public class UsuarioServiceImpl implements UsuarioService{
     @Transactional
     @Override
     public void deletarUsuario(String id) {
+       if (!usuarioRepository.existsById(id)) {
+           throw new UsuarioNaoEncontradoException();
+       }
         usuarioRepository.findById(id).ifPresent(usuarioRepository::delete);
     }
 

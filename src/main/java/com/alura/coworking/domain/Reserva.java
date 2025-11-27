@@ -1,9 +1,6 @@
 package com.alura.coworking.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -12,15 +9,16 @@ import java.util.Objects;
 public class Reserva {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String idReserva;
     @ManyToOne(fetch = FetchType.LAZY) //Lazy para evitar carregamento desnecessário
     private Usuario usuario;
     @ManyToOne(fetch = FetchType.LAZY)
-    private Sala sala;
+    private Sala sala; // a reserva está associada a uma sala
     private String dataReserva;
     private LocalDateTime horaInicio;
     private LocalDateTime horaFim;
-    private StatusReserva statusReserva;
+    private StatusReserva statusReserva; // Status da reserva: ATIVA, CANCELADA, CONCLUIDA
 
     public Reserva(String idReserva, Usuario usuario, Sala sala, String dataReserva, LocalDateTime horaInicio, LocalDateTime horaFim) {
         this.idReserva = idReserva;

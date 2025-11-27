@@ -20,8 +20,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UsuarioNaoEncontradoException.class)
-    public ResponseEntity<Void> handleUsuarioNaoEncontrado(UsuarioNaoEncontradoException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<String> handleUsuarioNaoEncontrado(UsuarioNaoEncontradoException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
     @ExceptionHandler(ReservaInvalidaException.class)
@@ -36,5 +36,10 @@ public class GlobalExceptionHandler {
             sb.append(error.getField()).append(": ").append(error.getDefaultMessage()).append("; ");
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(sb.toString());
+    }
+
+    @ExceptionHandler(CpfJaCadastradoException.class)
+    public ResponseEntity<String> handleCpfJaCadastrado(CpfJaCadastradoException ex) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getReason());
     }
 }
