@@ -42,4 +42,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleCpfJaCadastrado(CpfJaCadastradoException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getReason());
     }
+
+    @ExceptionHandler(HoraInvalidaException.class)
+    public ResponseEntity<String> handleHoraInvalida(HoraInvalidaException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 }

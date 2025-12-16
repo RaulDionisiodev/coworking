@@ -1,5 +1,6 @@
 package com.alura.coworking.domain;
 
+import com.alura.coworking.exception.HoraInvalidaException;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -93,10 +94,10 @@ public class Reserva {
 
     private void validaHoraDaReserva(LocalDateTime horaInicio, LocalDateTime horaFim) {
         if (horaFim.isBefore(horaInicio)) {
-            throw new IllegalArgumentException("A hora de fim deve ser depois da hora de início.");
+            throw new HoraInvalidaException("A hora de fim deve ser depois da hora de início.");
         }
         if (horaFim.isEqual(horaInicio)) {
-            throw new IllegalArgumentException("A hora de fim deve ser diferente da hora de início.");
+            throw new HoraInvalidaException("A hora de fim deve ser diferente da hora de início.");
         }
     }
 
