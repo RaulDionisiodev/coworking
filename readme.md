@@ -1,5 +1,6 @@
+# Aplicação de Gerenciamento de Espaço de Coworking
+Este projeto é uma aplicação Spring Boot para gerenciar um espaço de coworking, incluindo funcionalidades para gerenciar membros, reservas de salas e faturamento. A aplicação utiliza diferentes perfis para facilitar o desenvolvimento, teste e produção, além de ser empacotada em um contêiner Docker para fácil implantação.
 
----
 ## Perfis de Ambiente e Conexão com o Banco de Dados
 
 A aplicação utiliza perfis do Spring Boot para facilitar a configuração de diferentes ambientes (desenvolvimento, teste e produção).
@@ -54,6 +55,21 @@ Ou execute com argumento:
 -Dspring.profiles.active=dev
 ```
 
----
+
+## Docker e Docker Compose
+
+A imagem Docker da aplicação foi criada em duas etapas no arquivo Dockerfile:
+
+- **Build:** Utiliza a imagem `eclipse-temurin:21-jdk` para compilar o projeto com Gradle e gerar o arquivo `.jar`.
+- **Execução:** Usa a imagem `eclipse-temurin:21-jre`, instala o `netcat-openbsd` para aguardar o MySQL iniciar, copia o `.jar` gerado e define as variáveis de ambiente e o entrypoint para rodar o Spring Boot.
+
+### Como rodar a aplicação com Docker Compose
+
+1. Certifique-se de que o arquivo `docker-compose.yml` está na raiz do projeto.
+2. Execute o comando abaixo para construir e iniciar os containers:
+   ```
+   docker-compose up --build
+   ```
+3. A aplicação irá aguardar o banco MySQL estar disponível antes de iniciar, evitando erros de conexão.
 
 Adapte conforme necessário para o seu projeto.
